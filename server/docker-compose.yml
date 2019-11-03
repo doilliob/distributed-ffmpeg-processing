@@ -1,0 +1,35 @@
+version: '2.4'
+services:
+  
+
+  ftp-server:
+    image: 'fauria/vsftpd'
+    container_name: 'vsftpd'
+    hostname: 'vsftpd'
+    volumes:
+      - './ftp/in:/home/vsftpd/admin/in'
+      - './ftp/out:/home/vsftpd/admin/out'
+    network_mode: host
+    environment:
+      - FTP_USER=admin
+      - FTP_PASS=admin
+      - PASV_ADDRESS=192.168.0.1
+      - PASV_MIN_PORT=21100
+      - PASV_MAX_PORT=30110
+    restart: always
+
+
+  queue-server:
+    image: 'rabbitmq:3-management'
+    container_name: 'rabbitmq'
+    hostname: 'rabbitmq' 
+    ports:
+      - '8080:15672'
+      - '5672:5672'
+    environment:
+      - RABBITMQ_DEFAULT_USER=TZBgaW3bDtYXRno5
+      - RABBITMQ_DEFAULT_PASS=N0uArziqiLWTsfsn
+    restart: always
+
+
+ 

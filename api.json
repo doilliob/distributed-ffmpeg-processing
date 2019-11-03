@@ -1,0 +1,39 @@
+[
+	
+	// 1. Скрипт публикует задание в RabbitMQ в очереди video_processing_tasks
+	// 2. Клиент подключается к RabbitMQ и принимает задание
+	// 3. Обработка зададания:
+	//	  выполнена правильно - клиент подтверждает задание, удаляя его из очереди,
+	//    выполнена с ошибкой - клиент разрывает соединение и задание достается другому клиенту
+	{
+		"type": "task",
+		"task_id": "ABCDefG123", // Не использкется
+		"comment": "Add new task in queue 'video_processing_tasks'", // Не использкется
+		
+		// Параметры входного файла
+		"ftp_in_host": "localhost",
+		"ftp_in_port": 21,
+		"ftp_in_username": "admin",
+		"ftp_in_password": "admin123",
+		"ftp_in_dir": "/out/",
+		"ftp_in_filename": "file_in.mp4",
+
+		// Параметры выходного файла
+		"ftp_out_host": "localhost",
+		"ftp_out_port": 21,
+		"ftp_out_username": "admin",
+		"ftp_out_password": "admin123",
+		"ftp_out_dir": "/out/",
+		"ftp_out_filename": "file_in.mp4",
+
+		// Параметры конвертации
+		"ffmpeg_video_codec": "h264",
+		"ffmpeg_video_bitrate": "500k",
+		"ffmpeg_audio_codec": "aac",
+		"ffmpeg_audio_bitrate": "128k",
+		"ffmpeg_vf": "scale=1024:768",
+		"ffmpeg_from": "",
+        "ffmpeg_to": ""
+	}
+
+]
